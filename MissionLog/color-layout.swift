@@ -6,12 +6,13 @@
 //
 
 import Foundation
-
-extension ShapeStyle where self == Color{
-    static var darkbackground: Color {
-        Color(red: 0.1, green: 0.1, blue: 0.2)
+import SwiftUI
+extension ShapeStyle where Self == Color {
+    static var darkBackground: Color {
+        Color(red: 212/255, green: 175/255, blue: 55/255)
     }
-    static var lightbackground: Color {
+
+    static var lightBackground: Color {
         Color(red: 0.2, green: 0.2, blue: 0.3)
     }
 }
