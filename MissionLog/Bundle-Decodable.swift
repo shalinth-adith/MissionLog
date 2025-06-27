@@ -17,9 +17,16 @@ extension Bundle {
         }
         let decoder = JSONDecoder()
         
-        guard let loaded = try? decoder.decode([String: Astronaut].self, from: data) else {
-            fatalError("Failed to decode \(file) from bundle. ")
+        do {
+            return try decoder.decode([String : Astronaut].self , from: data)
+        }catch DecodingError.keyNotFound(let key, let context){
+            fatalError("Failed to decode \(file) from bundle due to missing key '\(key.stringValue)' - \(context.debugDescription)")
+        }catch DecodingError.typeMismatch(_,let context){
+            fatalError("Failed to decode \(file) from bundle due to type mismatch - \(context.debugDescription) ")
+        }catch DecodingError.valueNotFound(let type,let context){
+            fatalError("Failed tp decode \(file) from bundle due to missing \(type) value - \(context.debugDescription)")
+        }catch{
+            fatalError("Failed to decode \(file) from bundle : \(error.localizedDescription)")
         }
-        return loaded
     }
 }
