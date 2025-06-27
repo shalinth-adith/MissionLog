@@ -31,10 +31,10 @@ struct ContentView: View {
                                     Text(mission.displayName)
                                         .font(.headline)
                                     
-                                    Text(mission.launchDate ?? "No date")
+                                    Text(mission.formattedLaunchDate)
                                         .font(.caption)
                                 }
-                              }
+                               }
                         }
                     }
                 }
