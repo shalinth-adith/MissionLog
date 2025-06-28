@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Binding var showMainScreen: Bool
+
+    
     let astronauts:[String: Astronaut] = Bundle.main.decode("astronauts.json")
     let missions: [Mission] = Bundle.main.decode("missions.json")
     
@@ -58,15 +61,26 @@ struct ContentView: View {
                     startPoint: .top,
                     endPoint: .bottom
                 )
-                                .ignoresSafeArea()
-                            )
+                .ignoresSafeArea()
+            )
             .navigationTitle("Mission Log")
             .preferredColorScheme(.dark)
-            
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        showMainScreen = false
+                    } label: {
+                        Image(systemName: "chevron.left")
+                            .foregroundColor(.blue)
+                        Text("Back")
+                            .foregroundColor(.blue)
+                    }
+                }
+            }
         }
     }
 }
 
 #Preview {
-    ContentView()
+    ContentView(showMainScreen: .constant(true))
 }

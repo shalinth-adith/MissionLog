@@ -7,11 +7,52 @@
 
 import SwiftUI
 
+
+import SwiftUI
+
 struct EntryView: View {
+    @State private var showMainScreen = false
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        if showMainScreen {
+                    ContentView(showMainScreen: $showMainScreen)
+            } else {
+            VStack(spacing: 15) {
+                Image("mainlogo")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 200, height: 200)
+
+                Text("Mission Log")
+                    .font(.largeTitle.bold())
+                    .foregroundColor(.white)
+                    .multilineTextAlignment(.center)
+
+                Button("Next") {
+                    withAnimation {
+                        showMainScreen = true
+                    }
+                }
+                .padding()
+                .frame(width: 150)
+                .foregroundColor(.black)
+                .clipShape(Capsule())
+            }
+           
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(
+                LinearGradient(
+                    gradient: Gradient(colors: [Color.black, Color(red: 212/255, green: 175/255, blue: 55/255)]),
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+                )
+            .ignoresSafeArea()
+            
+        }
     }
 }
+
 
 #Preview {
     EntryView()

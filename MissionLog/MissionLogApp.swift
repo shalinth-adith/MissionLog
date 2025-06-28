@@ -11,7 +11,7 @@ import SwiftUI
 struct MissionLogApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            EntryView()
         }
     }
 }
