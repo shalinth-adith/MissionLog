@@ -57,12 +57,14 @@ struct ContentView: View {
             .scrollContentBackground(.hidden)
             .background(
                 LinearGradient(
-                    gradient: Gradient(colors: [Color.black, Color(red: 212/255, green: 175/255, blue: 55/255)]),
+                    gradient: Gradient(colors: [Color.black, Color(red: 0/255, green: 0/255, blue: 128/255)]),
                     startPoint: .top,
                     endPoint: .bottom
                 )
                 .ignoresSafeArea()
-            )
+
+                )
+            
             .navigationTitle("Mission Log")
             .preferredColorScheme(.dark)
             .toolbar {

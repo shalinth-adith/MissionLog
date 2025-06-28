@@ -25,7 +25,7 @@ struct MissionView: View {
                         .resizable()
                         .scaledToFit()
                         .containerRelativeFrame(.horizontal) { width, axis in
-                            width * 0.8
+                            width * 0.6
                         }
                     VStack(alignment: .leading){
                         Text("Mission Highlights")
@@ -34,6 +34,34 @@ struct MissionView: View {
                         Text(mission.description)
                     }
                     .padding(.horizontal)
+                    ScrollView(.horizontal,showsIndicators: false){
+                        HStack{
+                            ForEach(crew , id: \.role) { crewMember in
+                                NavigationLink{
+                                    Text("Astronaut details ")
+                                }label:{
+                                    HStack{
+                                        Image(crewMember.astronaut.id)
+                                            .resizable()
+                                            .frame(width: 104, height: 72)
+                                            .clipShape(.capsule)
+                                            .overlay(
+                                                Capsule()
+                                                    .strokeBorder(.white , lineWidth:1)
+                                                )
+                                        VStack(alignment: .leading){
+                                            Text(crewMember.astronaut.name)
+                                                .foregroundStyle(.white)
+                                                .font(.headline)
+                                            
+                                            Text(crewMember.role)
+                                                .foregroundStyle(.secondary)
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
                 .padding(.bottom)
             }
@@ -41,7 +69,7 @@ struct MissionView: View {
             .navigationBarTitleDisplayMode(.inline)
             .background(
                 LinearGradient(
-                    gradient: Gradient(colors: [Color.black, Color(red: 212/255, green: 175/255, blue: 55/255)]),
+                    gradient: Gradient(colors: [Color.black, Color(red: 0/255, green: 0/255, blue: 128/255)]),
                     startPoint: .top,
                     endPoint: .bottom
                 )
