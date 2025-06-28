@@ -8,7 +8,14 @@
 import SwiftUI
 
 struct MissionView: View {
+    struct crewMember: Codable{
+        let role: String
+        let astronaut: Astronaut
+    }
+    
     let mission : Mission
+    let crew: [crewMember]
+    
     
     var body: some View {
         NavigationStack{
@@ -41,10 +48,23 @@ struct MissionView: View {
                 )
         }
     }
+    init(mission: Mission, astronauts: [String: Astronaut]) {
+        self.mission = mission
+
+        self.crew = mission.crew.map { member in
+            if let astronaut = astronauts[member.name] {
+                return crewMember(role: member.role, astronaut: astronaut)
+            } else {
+                fatalError("Missing \(member.name)")
+            }
+        }
+    }
+
 }
 
 #Preview {
     let missions: [Mission] = Bundle.main.decode("missions.json")
-    return MissionView(mission: missions[0])
+    let astronauts: [String : Astronaut] = Bundle.main.decode("astronauts.json")
+    return MissionView(mission: missions[0] , astronauts: astronauts)
         .preferredColorScheme(.dark)
 }
