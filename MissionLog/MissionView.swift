@@ -27,6 +27,9 @@ struct MissionView: View {
                         .containerRelativeFrame(.horizontal) { width, axis in
                             width * 0.6
                         }
+                    if let launchDate = mission.launchDate{
+                        Label(launchDate.formatted(date: .complete, time: .omitted), systemImage: "calendar")
+                    }
                     Rectangle()
                         .frame(height: 2)
                         .foregroundStyle(.lightBackground)
